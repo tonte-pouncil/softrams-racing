@@ -45,4 +45,18 @@ export class AppService {
     }
     return [];
   }
+
+  public getMember(memberId: string) {
+    return this.http.get(`${this.api}/members/` + memberId).pipe(catchError(this.handleError));
+    /*return {
+      firstName: 'Tonte',
+      lastName: 'Pouncil',
+      jobTitle: 'Reserve Driver',
+      team: {
+          'id': 1,
+          'name': 'Formula 1 - Car 77'
+      },
+      status: 'Inactive',
+    };*/
+  }
 }
