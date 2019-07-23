@@ -31,6 +31,10 @@ export class AppService {
     this.username = name;
   }
 
+  getUsername(): string {
+      return this.username;
+  }
+
   addMember(member) {
       return this.http.post(`${this.api}/members/` + member.id, member).pipe(catchError(this.handleError));
   }

@@ -81,6 +81,10 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
       const memberId = this.route.snapshot.paramMap.get('memberId');
 
+      if (this.appService.getUsername() === null || this.appService.getUsername() === undefined) {
+          this.router.navigate(['/login']);
+      }
+
       if (memberId === null || memberId === undefined) {
           this.mode = 'add';
       }
