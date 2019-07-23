@@ -17,10 +17,14 @@ export class MembersComponent implements OnInit {
   }
 
   goToAddMemberForm() {
-    console.log(`Hmmm...we didn't navigate anywhere`);
+      this.router.navigate(['/new-member']);
   }
 
   editMemberByID(id: number) {}
 
-  deleteMemberById(id: number) {}
+  deleteMemberById(id: number) {
+    this.appService.deleteMember(id).subscribe(result => {
+        this.appService.getMembers().subscribe(members => (this.members = members));
+    });
+  }
 }

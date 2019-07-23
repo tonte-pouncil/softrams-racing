@@ -31,7 +31,12 @@ export class AppService {
     this.username = name;
   }
 
-  addMember(memberForm) {
+  addMember(member) {
+      return this.http.post(`${this.api}/members/` + member.id, member).pipe(catchError(this.handleError));
+  }
+
+  updateMember(member) {
+    return this.http.put(`${this.api}/members/` + member.id, member).pipe(catchError(this.handleError));
   }
 
   getTeams() {
@@ -48,15 +53,9 @@ export class AppService {
 
   public getMember(memberId: string) {
     return this.http.get(`${this.api}/members/` + memberId).pipe(catchError(this.handleError));
-    /*return {
-      firstName: 'Tonte',
-      lastName: 'Pouncil',
-      jobTitle: 'Reserve Driver',
-      team: {
-          'id': 1,
-          'name': 'Formula 1 - Car 77'
-      },
-      status: 'Inactive',
-    };*/
+  }
+
+  public deleteMember(memberId: number) {
+      return this.http.delete(`${this.api}/members/` + memberId).pipe(catchError(this.handleError));
   }
 }
