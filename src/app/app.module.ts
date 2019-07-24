@@ -13,6 +13,7 @@ import { BannerComponent } from './banner/banner.component';
 import { MemberDetailsComponent } from './member-details/member-details.component';
 import { MembersComponent } from './members/members.component';
 import { LoginComponent } from './login/login.component';
+import { LoginGaurd } from './models/login-gaurd';
 
 // We may be missing a route...
 const ROUTES = [
@@ -23,15 +24,18 @@ const ROUTES = [
   },
   {
     path: 'members',
-    component: MembersComponent
+    component: MembersComponent,
+    canActivate: [LoginGaurd]
   },
   {
       path: 'new-member',
-      component: MemberDetailsComponent
+      component: MemberDetailsComponent,
+      canActivate: [LoginGaurd]
   },
   {
     path: 'members/:memberId',
-    component: MemberDetailsComponent
+    component: MemberDetailsComponent,
+      canActivate: [LoginGaurd]
   },
   {
     path: 'login',
@@ -49,7 +53,7 @@ const ROUTES = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [AppService, HttpClient],
+  providers: [AppService, HttpClient, LoginGaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

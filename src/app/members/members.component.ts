@@ -13,9 +13,6 @@ export class MembersComponent implements OnInit {
   constructor(public appService: AppService, private router: Router) {}
 
   ngOnInit() {
-    if (this.appService.getUsername() === null || this.appService.getUsername() === undefined) {
-        this.router.navigate(['/login']);
-    }
     this.appService.getMembers().subscribe(members => (this.members = members));
   }
 
