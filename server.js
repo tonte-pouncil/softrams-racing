@@ -43,14 +43,45 @@ app.get('/api/members', (req, res) => {
   });
 });
 
-// TODO: Dropdown!
-app.get('/api/teams', (req, res) => {
+app.get('/api/members/:id', (req, res) => {
+    const id = req.params.id;
+    request('http://localhost:3000/members/' + id, (err, response, body) => {
+        if (response.statusCode <= 500) {
+            res.send(body);
+        }
+    });
+});
 
+app.put('/api/members/:id', (req, res) => {
+    const id = req.params.id;
+    request({url: 'http://localhost:3000/members/'+ id, method: 'PUT', json: req.body}, (err, response, body) => {
+        if (response.statusCode <= 500) {
+            res.send(body);
+        }
+    });
 });
 
 // Submit Form!
-app.post('/api/addMember', (req, res) => {
+app.post('/api/members', (req, res) => {
+    request({url: 'http://localhost:3000/members', method: 'POST', json: req.body}, (err, response, body) => {
+        if (response.statusCode <= 500) {
+            res.send(body);
+        }
+    });
+});
 
+app.delete('/api/members/:id', (req, res) => {
+    const id = req.params.id;
+    request({url: 'http://localhost:3000/members/'+ id, method: 'DELETE'}, (err, response, body) => {
+        if (response.statusCode <= 500) {
+            res.send(body);
+        }
+    });
+});
+
+// TODO: Dropdown!
+app.get('/api/teams', (req, res) => {
+    console.log('teams operation not yet implemented.');
 });
 
 app.get('*', (req, res) => {

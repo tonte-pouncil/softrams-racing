@@ -36,7 +36,7 @@ export class AppService {
   }
 
   addMember(member) {
-      return this.http.post(`${this.api}/members/` + member.id, member).pipe(catchError(this.handleError));
+      return this.http.post(`${this.api}/members`, member).pipe(catchError(this.handleError));
   }
 
   updateMember(member) {

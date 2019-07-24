@@ -13,7 +13,8 @@
     "client-dev": "ng serve",
     "client-prod": "ng build --prod",
     "server": "nodemon server.js",
-    "server-dev": "npm-run-all json-server server"
+    "server-dev": "npm-run-all json-server server",
+    "debug-node-server": "node $NODE_DEBUG_OPTION server.js"
   },
   "private": true,
   "dependencies": {
