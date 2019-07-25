@@ -1,8 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AppService } from '../app.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // This interface may be useful in the times ahead...
 interface Member {
@@ -26,52 +25,7 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
   submitted = false;
   alertType: String;
   alertMessage: String;
-  teams = [
-      {
-          'id': 1,
-          'name': 'Formula 1 - Car 77'
-      },
-      {
-          'id': 2,
-          'name': 'Formula 1 - Car 8'
-      },
-      {
-          'id': 3,
-          'name': 'Formula 2 - Car 54'
-      },
-      {
-          'id': 4,
-          'name': 'Formula 2 - Car 63'
-      },
-      {
-          'id': 5,
-          'name': 'Deutsche Tourenwagen Masters - Car 117'
-      },
-      {
-          'id': 6,
-          'name': 'Deutsche Tourenwagen Masters - Car 118'
-      },
-      {
-          'id': 7,
-          'name': 'World Endurance Championship - Car 99'
-      },
-      {
-          'id': 8,
-          'name': 'World Endurance Championship - Car 5'
-      },
-      {
-          'id': 9,
-          'name': 'World Rally Championship - Car 77'
-      },
-      {
-          'id': 10,
-          'name': 'World Rally Championship - Car 90'
-      },
-      {
-          'id': 11,
-          'name': 'Formula 1 - Car 78'
-      },
-  ];
+  teams = [];
 
   constructor(private fb: FormBuilder, private appService: AppService, private router: Router, private route: ActivatedRoute) {
       this.memberForm = this.createFormGroup();
@@ -84,6 +38,10 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
       if (memberId === null || memberId === undefined) {
           this.mode = 'add';
       }
+
+      this.appService.getTeams().subscribe(teams => {
+         this.teams = [...teams];
+      });
 
       this.appService.getMember(memberId).subscribe(member => {
           let teamMember = null;

@@ -81,7 +81,11 @@ app.delete('/api/members/:id', (req, res) => {
 
 // TODO: Dropdown!
 app.get('/api/teams', (req, res) => {
-    console.log('teams operation not yet implemented.');
+    request('http://localhost:3000/teams', (err, response, body) => {
+        if (response.statusCode <= 500) {
+            res.send(body);
+        }
+    });
 });
 
 app.get('*', (req, res) => {

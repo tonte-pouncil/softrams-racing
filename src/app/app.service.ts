@@ -44,6 +44,7 @@ export class AppService {
   }
 
   getTeams() {
+      return this.http.get(`${this.api}/teams`).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
