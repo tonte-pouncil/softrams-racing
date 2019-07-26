@@ -23,14 +23,6 @@
       "jobTitle": "Reserve Driver",
       "team": "Formula 1 - Car 77",
       "status": "Inactive"
-    },
-    {
-      "id": 4,
-      "firstName": "Mike",
-      "lastName": "Jones",
-      "jobTitle": "Driver",
-      "team": "Deutsche Tourenwagen Masters - Car 117",
-      "status": "Inactive"
     }
   ],
   "teams": [

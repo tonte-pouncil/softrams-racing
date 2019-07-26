@@ -20,7 +20,7 @@ export class MembersComponent implements OnInit {
       this.router.navigate(['/new-member']);
   }
 
-  editMemberByID(id: number) {}
+  // editMemberByID(id: number) {}
 
   deleteMemberById(id: number) {
     this.appService.deleteMember(id).subscribe(result => {

@@ -22,7 +22,6 @@ export class AppService {
     }
   }
 
-  // Returns all members
   getMembers() {
     return this.http.get(`${this.api}/members`).pipe(catchError(this.handleError));
   }

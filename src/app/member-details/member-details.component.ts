@@ -64,7 +64,6 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges() {}
 
-  // TODO: Add member to members
   onSubmit(form: FormGroup) {
     this.memberModel = {
       id: form.value.id,
