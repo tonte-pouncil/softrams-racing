@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Member } from 'src/app/models/member';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,12 @@ export class AppService {
     return this.http.put(`${this.api}/members/` + member.id, member).pipe(catchError(this.handleError));
   }
 
-  getTeams() {
-      return this.http.get(`${this.api}/teams`).pipe(catchError(this.handleError));
+  getTeams(): Promise<{id: string, name: string}[]> {
+      return new Promise((resolve, reject) => {
+          this.http.get(`${this.api}/teams`).pipe(catchError(this.handleError)).toPromise().then(teams => {
+            resolve(teams);
+          });
+      });
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -55,8 +60,12 @@ export class AppService {
     return [];
   }
 
-  public getMember(memberId: string) {
-    return this.http.get(`${this.api}/members/` + memberId).pipe(catchError(this.handleError));
+  public getMember(memberId: string): Promise<Member> {
+    return new Promise((resolve, reject) => {
+        this.http.get(`${this.api}/members/` + memberId).pipe(catchError(this.handleError)).toPromise().then(member => {
+          resolve(member);
+        });
+    });
   }
 
   public deleteMember(memberId: number) {

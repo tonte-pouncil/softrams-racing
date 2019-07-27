@@ -2,16 +2,9 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AppService } from '../app.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Member } from 'src/app/models/member';
 
-// This interface may be useful in the times ahead...
-interface Member {
-  id: number;
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  team: string;
-  status: string;
-}
+
 
 @Component({
   selector: 'app-member-details',
@@ -39,25 +32,26 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
           this.mode = 'add';
       }
 
-      this.appService.getTeams().subscribe(teams => {
+      this.appService.getTeams().then(teams => {
          this.teams = [...teams];
-      });
-
-      this.appService.getMember(memberId).subscribe(member => {
-          let teamMember = null;
-          this.teams.some(team => {
-              if (team.name === member.team) {
-                  teamMember = team;
-                  return true;
-              }
-          });
-          this.memberForm.setValue({
-              id: memberId,
-              firstName: member.firstName,
-              lastName: member.lastName,
-              jobTitle: member.jobTitle,
-              team: teamMember,
-              status: member.status
+         return teams;
+      }).then(teams => {
+          this.appService.getMember(memberId).then(member => {
+              let teamMember = null;
+              const foundTeam = this.teams.some(team => {
+                  if (team.name === member.team) {
+                      teamMember = team;
+                      return true;
+                  }
+              });
+              this.memberForm.setValue({
+                  id: memberId,
+                  firstName: member.firstName,
+                  lastName: member.lastName,
+                  jobTitle: member.jobTitle,
+                  team: teamMember,
+                  status: member.status
+              });
           });
       });
   }
@@ -91,7 +85,7 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
           firstName: new FormControl(''),
           lastName: new FormControl(''),
           jobTitle: new FormControl(''),
-          team: new FormControl(''),
+          team: new FormControl({id: null, name: null}),
           status: new FormControl('')
       });
   }

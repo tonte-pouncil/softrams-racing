@@ -33,7 +33,7 @@
             formControlName="jobTitle"/>
         </div>
         <!--We may have to make a service call to get this list-->
-        <select id="team" class="col-md-6 custom-select" formControlName="team" [compareWith]="compareFn">
+        <select id="team" class="col-md-6 custom-select" formControlName="team">
           <option [ngValue]="team" *ngFor="let team of teams">{{ team.name }}</option>
         </select>
       </div>
