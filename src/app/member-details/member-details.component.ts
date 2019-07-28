@@ -22,7 +22,7 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder, private appService: AppService, private router: Router, private route: ActivatedRoute) {
       this.memberForm = this.createFormGroup();
-      this.route.params.subscribe(params => {});
+      // this.route.params.subscribe(params => {});
   }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
       }).then(teams => {
           this.appService.getMember(memberId).then(member => {
               let teamMember = null;
-              const foundTeam = this.teams.some(team => {
+              const foundTeam = teams.some(team => {
                   if (team.name === member.team) {
                       teamMember = team;
                       return true;
