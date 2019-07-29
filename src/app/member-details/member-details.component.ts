@@ -22,7 +22,6 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder, private appService: AppService, private router: Router, private route: ActivatedRoute) {
       this.memberForm = this.createFormGroup();
-      // this.route.params.subscribe(params => {});
   }
 
   ngOnInit() {
